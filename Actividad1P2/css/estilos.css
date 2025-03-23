@@ -1,0 +1,45 @@
+.Catalina{
+	justify-content: center;
+	background-image: url('/Images/fondooscuro.png');
+	background-repeat: no-repeat;
+	background-size: cover;
+
+	}
+
+.Benjamín{
+	justify-content: center;
+	background-image: url('/Images/fondo.png');
+	background-repeat: no-repeat;
+	background-size: cover;
+
+}
+.body{
+	background-image: url('/Images/fondoblackspace.jpeg');
+	background-size: cover;
+	background-color: rgba(153, 66, 204, 0.849);
+}
+
+h1{
+	color :rgb(255, 255, 255);
+	font-family: "Press Start 2P", "consolas", sans-serif;
+}
+
+ h2, p, ul, li{
+	color: rgb(255, 255, 255);
+	font-family: "Turret Road", sans-serif;
+}
+
+h4{
+	color:aliceblue;
+	font-family: 'Courier New', Courier, monospace;
+	text-align: center;
+}
+h3{
+	color:blanchedalmond;
+	font-family:"Turret Road", sans-serif;
+}
+ol{
+	font-size: larger;
+	background-color: rgba(225, 238, 234, 0.496);
+
+}

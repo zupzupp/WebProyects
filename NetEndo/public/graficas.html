@@ -1,0 +1,115 @@
+<script>
+    window.addEventListener('DOMContentLoaded', async () => {
+        const res = await fetch('/sesion-activa');
+        const data = await res.json();
+
+        if (!data.loggedIn || data.role !== 'admin') {
+            alert('Acceso no autorizado. Inicia sesión.');
+            window.location.href = '/login.html';
+        } else {
+            cargarUsuarios();
+        }
+    });
+</script>
+
+<!DOCTYPE HTML>
+<html lang=es>
+
+<head>
+    <meta charset="utf-8">
+    <title> NetEndo </title>
+    <meta name="autor" content="Catalina Pérez Vásquez">
+    <meta name="descripción" content="Página web dedicada para venta de videojuegos online">
+    <meta name="viewport" content="width = device-width, initial-scale = 1.0">
+    <link rel="stylesheet" href="/estilo.css">
+    <link href="https://fonts.googleapis.com/css2?family=Jersey+10&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=M+PLUS+Rounded+1c&family=Share+Tech&display=swap"
+        rel="stylesheet">
+    <link rel="icon" type="icon" href="/images/NetEndoIcon.png">
+</head>
+
+<body style=" background-image: url('/images/background_mario.png')">
+    <header>
+        <div class="Logo">
+            <img src="/images/NetEndo.png" width="100" height="100">
+            <a href="/index.html">
+                <h2>NetEndo</h2>
+            </a>
+        </div>
+        <nav>
+            <a href="/index.html" class="nav-link"> Inicio </a>
+            <a href="/carrito.html" class="nav-link"> Carrito</a>
+            <a href="/sobrenosotros.html" class="nav-link active"> Sobre Nosotros</a>
+            <a href="/contactanos.html" class="nav-link">Contactanos</a>
+            <a href="/login.html" class="nav-link" aria-current="page">Login</a>
+        </nav>
+    </header>
+    <div class="TituloGraficas">
+    <h1>Panel de Resumen</h1>
+    </div>
+    <div style="width: 80%; margin: 0 auto; background: white; padding: 2rem; border-radius: 15px;">
+        <canvas id="graficoProductos" height="150"></canvas>
+        <canvas id="graficoUsuarios" height="150" style="margin-top: 3rem;"></canvas>
+    </div>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.0/chart.umd.min.js"></script>
+
+    <script>
+        fetch('/api/resumen')
+            .then(res => res.json())
+            .then(data => {
+                const productosData = {
+                    labels: ['Total productos', 'Stock bajo (≤ 5)'],
+                    datasets: [{
+                        label: 'Productos',
+                        data: [data.totalProductos, data.stockBajo],
+                        backgroundColor: ['#0074D9', '#FF4136']
+                    }]
+                };
+
+                const usuariosData = {
+                    labels: ['Admins', 'Usuarios normales'],
+                    datasets: [{
+                        label: 'Usuarios',
+                        data: [data.admins, data.usuariosNormales],
+                        backgroundColor: ['#2ECC40', '#FF851B', '#B10DC9']
+                    }]
+                };
+
+                new Chart(document.getElementById('graficoProductos'), {
+                    type: 'bar',
+                    data: productosData,
+                    options: {
+                        responsive: true,
+                        plugins: {
+                            title: {
+                                display: true,
+                                text: 'Resumen de Productos'
+                            }
+                        }
+                    }
+                });
+
+                new Chart(document.getElementById('graficoUsuarios'), {
+                    type: 'doughnut',
+                    data: usuariosData,
+                    options: {
+                        responsive: true,
+                        plugins: {
+                            title: {
+                                display: true,
+                                text: 'Resumen de Usuarios'
+                            }
+                        }
+                    }
+                });
+            })
+            .catch(err => {
+                console.error("Error al cargar resumen:", err);
+            });
+    </script>
+    
+
+</body>
+
+</html>

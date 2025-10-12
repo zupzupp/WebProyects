@@ -1,0 +1,176 @@
+<!DOCTYPE HTML>
+<html lang=es>
+
+<head>
+    <meta charset="utf-8">
+    <title> NetEndo </title>
+    <meta name="autor" content="Catalina Pérez Vásquez">
+    <meta name="descripción" content="Página web dedicada para venta de videojuegos online">
+    <meta name="viewport" content="width = device-width, initial-scale = 1.0">
+    <link rel="stylesheet" href="/estilo.css">
+    <link href="https://fonts.googleapis.com/css2?family=Jersey+10&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=M+PLUS+Rounded+1c&family=Share+Tech&display=swap"
+        rel="stylesheet">
+    <link rel="icon" type="icon" href="/images/NetEndoIcon.png">
+</head>
+
+<body style=" background-image: url('/images/background_mario.png')">
+    <header>
+        <div class="Logo">
+            <img src="/images/NetEndo.png" width="100" height="100">
+            <a href="/index.html">
+                <h2>NetEndo</h2>
+            </a>
+        </div>
+        <nav>
+            <a href="/index.html" class="nav-link"> Inicio </a>
+            <a href="/carrito.html" class="nav-link"> Carrito</a>
+            <a href="/sobrenosotros.html" class="nav-link"> Sobre Nosotros</a>
+            <a href="/contactanos.html" class="nav-link">Contactanos</a>
+            <a href="/login.html" class="nav-link">Login</a>
+        </nav>
+    </header>
+
+    <section class="container-video">
+        <div class="video-wrap" style="padding-top: 30px;">
+            <div class="background-video">
+                <iframe width="700" height="367" src="https://www.youtube.com/embed/tqSY9mlmWIs?si=bmA8hbc8jv6VMBY5"
+                    title="YouTube video player" frameborder="0"
+                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                    referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+            </div>
+        </div>
+        <div class="text-content">
+            <div class="title">
+                <h2> Super Smash Bros.™ Ultimate </h2>
+            </div>
+            <div class="description">
+                <p>¡Un auténtico duelo de titanes de los videojuegos que podrás jugar cuando quieras y donde quieras! Lanza a tus rivales
+                del escenario usando uno de los nuevos personajes como Simon Belmont o King K. Rool que se unen a Inkling, Ridley y a
+                todos los combatientes presentes en la historia de Super Smash Bros. Disfruta de la velocidad mejorada y combate en los
+                nuevos escenarios basados en las series de Castlevania, Super Mario Odyssey y otras.</p>
+            </div>
+            <div class="price">
+                <p> Precio: $20000</p>
+                <p id="stock-text">Cantidad Disponible: cargando...</p>
+            </div>
+            <button onclick="agregarAlCarrito('Super Smash Bros.™ Ultimate', 20000, '/images/smashb.png')">Comprar</button></a>
+        </div>
+    </section>
+
+    <section class="maybe-you-like-it">
+        <div class="Franja-recomendacion">
+            <h2>También te pueden gustar...</h2>
+        </div>
+        <section class="anotherContainer">
+            <div class="card-wrap">
+
+                <article class="card">
+                    <header class="header-card">
+                        <img src="/images/splatoon.jpg" alt="Splatoon 3 Card">
+                    </header>
+                    <div class="footer-card">
+                        <div class="category-card">
+                            <span class="Multijugador"> Multijugador</span>
+                        </div>
+                        <div class="text-card">
+                            <h3>Splatoon 3</h3>
+                            <a href="/gamesProducts/splatoon3.html"><button> Ver </button></a>
+                        </div>
+                    </div>
+                </article>
+                
+                <article class="card">
+                    <header class="header-card">
+                        <img src="/images/supermario.png" alt="Super Mario Card">
+                    </header>
+                    <div class="footer-card">
+                        <div class="category-card">
+                            <span class="Fantasia"> Fantasía</span>
+                            <span class="Multijugador"> Multijugador</span>
+                        </div>
+                        <div class="text-card">
+                            <h3>Super Mario Party Jamboree</h3>
+                            <a href="/gamesProducts/supermarioparty.html"><button> Ver </button></a>
+                        </div>
+                    </div>
+                </article>
+
+
+                <article class="card">
+                    <header class="header-card">
+                        <img src="/images/kirbyimg.png" alt="Kirby Card">
+                    </header>
+                    <div class="footer-card">
+                        <div class="category-card">
+                            <span class="Fantasia"> Fantasía</span>
+                        </div>
+                        <div class="text-card">
+                            <h3> Kirby and the Forgotten Land</h3>
+                            <a href="/gamesProducts/kirbygame.html"><button> Ver </button> </a>
+                        </div>
+                    </div>
+                    </article>
+            </div>
+        </section>
+    </section>
+</body>
+<script>
+     const idProducto = 8; // El ID de Among Us en tu tabla
+        const nombreProducto = "Super Smash Bros.™ Ultimate";
+        const precioProducto = 20000;
+        const imagenProducto = "/images/smashb.png";
+
+        async function obtenerStock(id) {
+            try {
+                const response = await fetch(`/producto-stock/${id}`);
+                if (!response.ok) {
+                    throw new Error(`Error al obtener stock: ${response.status} ${response.statusText}`);
+                }
+                const data = await response.json();
+                if (typeof data.stock !== 'number') {
+                    throw new Error('Respuesta inválida del servidor: no se encontró stock');
+                }
+                return data.stock;
+            } catch (error) {
+                console.error('Error en obtenerStock:', error);
+                return null;
+            }
+        }
+
+
+    async function mostrarStock() {
+        const stock = await obtenerStock(idProducto);
+        const stockTexto = document.getElementById("stock-text");
+        if (stock !== null) {
+            stockTexto.textContent = `Cantidad Disponible: ${stock}`;
+            if (stock <= 0) {
+                stockTexto.textContent = "Producto agotado";
+                document.getElementById("btnComprar").disabled = true;
+            }
+        } else {
+            stockTexto.textContent = "No se pudo cargar el stock";
+        }
+    }
+
+    mostrarStock();
+    function agregarAlCarrito(nombre, precio, imagen) {
+        // Trae el carrito existente o lo inicializa como array vacío
+        let carrito = JSON.parse(localStorage.getItem("carrito")) || [];
+
+        // Verifica si el producto ya está en el carrito
+        let productoExistente = carrito.find(item => item.nombre === nombre);
+
+        if (productoExistente) {
+            productoExistente.cantidad += 1;
+        } else {
+            carrito.push({ nombre, precio, imagen, cantidad: 1 });
+        }
+
+        // Guarda el nuevo carrito
+        localStorage.setItem("carrito", JSON.stringify(carrito));
+
+        alert(`"${nombre}" se agregó al carrito`);
+    }
+</script>
+</html>

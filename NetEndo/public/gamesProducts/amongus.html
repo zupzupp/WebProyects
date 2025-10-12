@@ -1,0 +1,182 @@
+<!DOCTYPE HTML>
+<html lang="es">
+
+<head>
+    <meta charset="utf-8">
+    <title>NetEndo - Among Us</title>
+    <meta name="autor" content="Catalina Pérez Vásquez">
+    <meta name="descripción" content="Página de Among Us en NetEndo">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/estilo.css">
+    <link href="https://fonts.googleapis.com/css2?family=Jersey+10&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=M+PLUS+Rounded+1c&family=Share+Tech&display=swap"
+        rel="stylesheet">
+    <link rel="icon" type="icon" href="/images/NetEndoIcon.png">
+</head>
+
+<body style="background-image: url('/images/background_mario.png')">
+    <header>
+        <div class="Logo">
+            <img src="/images/NetEndo.png" width="100" height="100" alt="Logo NetEndo">
+            <a href="/index.html">
+                <h2>NetEndo</h2>
+            </a>
+        </div>
+        <nav>
+            <a href="/index.html" class="nav-link">Inicio</a>
+            <a href="/carrito.html" class="nav-link">Carrito</a>
+            <a href="/sobrenosotros.html" class="nav-link">Sobre Nosotros</a>
+            <a href="/contactanos.html" class="nav-link">Contáctanos</a>
+            <a href="/login.html" class="nav-link">Login</a>
+        </nav>
+    </header>
+
+    <section class="container-video">
+        <div class="video-wrap">
+            <div class="background-video">
+                <iframe width="700" height="367" src="https://www.youtube.com/embed/vlVeaz_l5Jg?si=N1_l5u8jwmRlIk_v"
+                    title="YouTube video player" frameborder="0"
+                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                    referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+            </div>
+        </div>
+        <div class="text-content">
+            <div class="title">
+                <h2>Among Us</h2>
+            </div>
+            <div class="description">
+                <p>¡Un juego en línea y local para 4 a 15 personas que incluye trabajo en equipo y traición en el
+                    espacio!
+                    Juega con 4 a 15 personas en línea o con wifi local mientras intentas preparar la nave para partir,
+                    pero ten cuidado: uno o más jugadores aleatorios de la tripulación son impostores que quieren matar
+                    a
+                    todos.</p>
+            </div>
+            <div class="price">
+                <p>Precio: $1000</p>
+                <p id="stock-text">Cantidad Disponible: cargando...</p>
+            </div>
+            <button id="btnComprar">Comprar</button>
+        </div>
+    </section>
+
+    <section class="maybe-you-like-it">
+        <div class="Franja-recomendacion">
+            <h2>También te pueden gustar...</h2>
+        </div>
+        <section class="anotherContainer">
+            <div class="card-wrap">
+
+                <article class="card">
+                    <header class="header-card">
+                        <img src="/images/animalcrossing.jpg" alt="Animal Crossing Card">
+                    </header>
+                    <div class="footer-card">
+                        <div class="category-card">
+                            <span class="Simulacion">Simulación</span>
+                            <span class="Multijugador">Multijugador</span>
+                        </div>
+                        <div class="text-card">
+                            <h3>Animal Crossing</h3>
+                            <a href="/gamesProducts/animalcrossing.html"><button>Ver</button></a>
+                        </div>
+                    </div>
+                </article>
+
+                <article class="card">
+                    <header class="header-card">
+                        <img src="/images/splatoon.jpg" alt="Splatoon 3 Card">
+                    </header>
+                    <div class="footer-card">
+                        <div class="category-card">
+                            <span class="Multijugador">Multijugador</span>
+                        </div>
+                        <div class="text-card">
+                            <h3>Splatoon 3</h3>
+                            <a href="/gamesProducts/splatoon3.html"><button>Ver</button></a>
+                        </div>
+                    </div>
+                </article>
+
+                <article class="card">
+                    <header class="header-card">
+                        <img src="/images/minecraftimg.png" alt="Minecraft Card">
+                    </header>
+                    <div class="footer-card">
+                        <div class="category-card">
+                            <span class="Simulacion">Simulación</span>
+                            <span class="Multijugador">Multijugador</span>
+                        </div>
+                        <div class="text-card">
+                            <h3>Minecraft</h3>
+                            <a href="/gamesProducts/minecraft.html"><button>Ver</button></a>
+                        </div>
+                    </div>
+                </article>
+
+            </div>
+        </section>
+    </section>
+
+    <script>
+       const idProducto = 5; // El ID de Among Us en tu tabla
+        const nombreProducto = "Among Us";
+        const precioProducto = 1000;
+        const imagenProducto = "/images/amongus.jpg";
+
+        async function obtenerStock(id) {
+            try {
+                const response = await fetch(`/producto-stock/${id}`);
+                if (!response.ok) {
+                    throw new Error(`Error al obtener stock: ${response.status} ${response.statusText}`);
+                }
+                const data = await response.json();
+                if (typeof data.stock !== 'number') {
+                    throw new Error('Respuesta inválida del servidor: no se encontró stock');
+                }
+                return data.stock;
+            } catch (error) {
+                console.error('Error en obtenerStock:', error);
+                return null;
+            }
+        }
+
+        async function mostrarStock() {
+            const stock = await obtenerStock(idProducto);
+            const stockTexto = document.getElementById("stock-text");
+            if (stock !== null) {
+                stockTexto.textContent = `Cantidad Disponible: ${stock}`;
+                if (stock <= 0) {
+                    stockTexto.textContent = "Producto agotado";
+                    document.getElementById("btnComprar").disabled = true;
+                }
+            } else {
+                stockTexto.textContent = "No se pudo cargar el stock";
+            }
+        }
+
+        mostrarStock();
+
+        function agregarAlCarrito(nombre, precio, imagen) {
+            let carrito = JSON.parse(localStorage.getItem("carrito")) || [];
+            let productoExistente = carrito.find(item => item.nombre === nombre);
+
+            if (productoExistente) {
+                productoExistente.cantidad += 1;
+            } else {
+                carrito.push({ nombre, precio, imagen, cantidad: 1 });
+            }
+
+            localStorage.setItem("carrito", JSON.stringify(carrito));
+            alert(`"${nombre}" se agregó al carrito`);
+        }
+
+        document.getElementById("btnComprar").addEventListener("click", () => {
+            agregarAlCarrito(nombreProducto, precioProducto, imagenProducto);
+        });
+
+    </script>
+    
+</body>
+
+</html>

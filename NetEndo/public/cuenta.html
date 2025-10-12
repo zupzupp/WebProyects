@@ -1,0 +1,73 @@
+<script>
+    window.addEventListener('DOMContentLoaded', async () => {
+        const res = await fetch('/sesion-activa');
+        const data = await res.json();
+
+        if (!data.loggedIn || data.role !== 'usuario') {
+            alert('Acceso no autorizado. Inicia sesión.');
+            window.location.href = '/login.html';
+        }
+    });
+</script>
+
+
+<!DOCTYPE HTML>
+<html lang=es>
+
+<head>
+    <meta charset="utf-8">
+    <title> NetEndo </title>
+    <meta name="autor" content="Catalina Pérez Vásquez">
+    <meta name="descripción" content="Página web dedicada para venta de videojuegos online">
+    <meta name="viewport" content="width = device-width, initial-scale = 1.0">
+    <link rel="stylesheet" href="/estilo.css">
+    <link href="https://fonts.googleapis.com/css2?family=Jersey+10&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=M+PLUS+Rounded+1c&family=Share+Tech&display=swap"
+        rel="stylesheet">
+    <link rel="icon" type="icon" href="/images/NetEndoIcon.png">
+</head>
+
+<header>
+    <div class="Logo">
+        <img src="/images/NetEndo.png" width="100" height="100">
+        <a href="/index.html">
+            <h2>NetEndo</h2>
+        </a>
+    </div>
+    <nav>
+        <a href="/index.html" class="nav-link"> Inicio </a>
+        <a href="/carrito.html" class="nav-link"> Carrito</a>
+        <a href="/sobrenosotros.html" class="nav-link"> Sobre Nosotros</a>
+        <a href="/contactanos.html" class="nav-link active" aria-current="page">Contactanos</a>
+        <a href="/login.html" class="nav-link">Login</a>
+    </nav>
+</header>
+<body style=" background-image: url('/images/background_mario.png')">
+
+    <div class = usuario>
+    <div class="contenido-cuenta">
+        <img id="imagenUsuario" src="/images/toddusuario.webp" alt="Usuario" width="200">
+        <div class="info-usuario">
+            <h1 id="saludoUsuario">¡Bienvenid@ a NetEndo!</h1>
+            <h3 id="rolUsuario">Tu rol es: Usuario</h3>
+        </div>
+    </div>
+    
+    <div class="cerrarsesion">
+        <button id="btncerrar">Cerrar sesión</button>
+    </div>
+</div>
+</body>
+
+<script>
+    document.getElementById('btncerrar').addEventListener('click', async () => {
+        const res = await fetch('/cerrar_sesion', { method: 'POST' });
+        const data = await res.json();
+
+        if (data.success) {
+            alert('Sesión cerrada correctamente');
+            window.location.href = '/login.html';
+        }
+    });
+</script>
+</html>

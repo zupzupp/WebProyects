@@ -1,0 +1,126 @@
+<!DOCTYPE HTML>
+<html lang=es>
+
+<head>
+    <meta charset="utf-8">
+    <title> NetEndo </title>
+    <meta name="autor" content="Catalina Pérez Vásquez">
+    <meta name="descripción" content="Página web dedicada para venta de videojuegos online">
+    <meta name="viewport" content="width = device-width, initial-scale = 1.0">
+    <link rel="stylesheet" href="/estilo.css">
+    <link href="https://fonts.googleapis.com/css2?family=Jersey+10&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=M+PLUS+Rounded+1c&family=Share+Tech&display=swap"
+        rel="stylesheet">
+    <link rel="icon" type="icon" href="/images/NetEndoIcon.png">
+</head>
+
+<body style=" background-image: url('/images/background_mario.png')">
+    <header>
+        <div class="Logo">
+            <img src="/images/NetEndo.png" width="100" height="100">
+            <a href="/index.html"><h2>NetEndo</h2></a>
+        </div>
+        <nav>
+            <a href="/index.html" class="nav-link"> Inicio </a>
+            <a href="/carrito.html" class="nav-link active" aria-current="page"> Carrito</a>
+            <a href="/sobrenosotros.html" class="nav-link"> Sobre Nosotros</a>
+            <a href="/contactanos.html" class="nav-link">Contactanos</a>
+            <a href="/login.html" class="nav-link">Login</a>
+        </nav>
+    </header>
+    <div class = "product">
+    <h1> Menú administrador </h1>
+    <form id= "formulario-producto" action="/guardar_producto" method="POST">
+        <h2>Agregar Producto</h2>
+
+        <label for="nombre">Nombre del producto</label>
+        <input type="text" id="nombre" name="nombre" required placeholder="Kirby and The Forgotten Land">
+
+        <label for="descripcion">Descripción breve</label>
+        <textarea id="descripcion" name="descripcion" rows="10" cols="50" required placeholder="Breve descripción del juego"></textarea>
+
+        <label for="precio">Precio</label>
+        <input type="number" id="precio" name="precio" required placeholder="5000" min="0" step="0.01">
+
+        <label for="categoria">Categoría</label>
+        <select id="categoria" name="categoria" required>
+            <option value="">Seleccione una categoría</option>
+            <option value="Fantasia">Fantasia</option>
+            <option value="Terror-psi">Terror Psicologico</option>
+            <option value="Multijugador">Multijugador</option>
+            <option value="Simulacion">Simulacion</option>
+            <option value="Otros">Otros</option>
+        </select>
+
+        <label for="cantidad">Cantidad</label>
+        <input type="number" id="cantidad" name="cantidad" required placeholder="2" min="0" step="0.01" >
+
+        <label for="imagen">URL de imagen</label>
+        <input type="url" id="imagen" name="imagen" required placeholder="URL de la imagen">
+
+        <button type="submit">Guardar producto</button>
+    </form>
+</div>
+
+<div id="popup-exito" class="popup">
+    <p id="popup-texto">Producto guardado con éxito</p>
+</div>
+  
+<script>
+    document.addEventListener("DOMContentLoaded", function () {
+        const formulario = document.getElementById("formulario-producto");
+        const popup = document.getElementById("popup-exito");
+        const popupTexto = document.getElementById("popup-texto");
+
+        function mostrarPopup(mensaje, esError = false) {
+            popupTexto.textContent = mensaje;
+            popup.classList.remove("error");
+            if (esError) popup.classList.add("error");
+
+            popup.style.display = "block";
+            setTimeout(() => {
+                popup.style.display = "none";
+            }, 3000);
+        }
+
+        formulario.addEventListener("submit", function (event) {
+            event.preventDefault();
+
+            const formData = new FormData(formulario);
+            const data = Object.fromEntries(formData.entries());
+
+            // Convertir 'cantidad' a 'stock'
+            data.stock = parseInt(data.cantidad);
+            delete data.cantidad;
+
+            // Convertir precio a número también por seguridad
+            data.precio = parseInt(data.precio);
+
+            fetch("/guardar_producto", {
+                method: "POST",
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify(data)
+            })
+                .then(res => {
+                    if (!res.ok) throw new Error("Error al guardar");
+                    return res.json();
+                })
+                .then(respuesta => {
+                    mostrarPopup(respuesta.mensaje || "Producto guardado con éxito");
+                    formulario.reset(); // Limpiar campos ✅
+                })
+                .catch(error => {
+                    console.error("Error:", error);
+                    mostrarPopup("Error al guardar el producto", true);
+                });
+        });
+    });
+</script>
+
+
+    </body>
+
+    <footer>
+        <h6> © 2025 Empresa de Videojuegos. Todos los derechos reservados.</h6>
+        </footer>
+    </html>

@@ -1,0 +1,157 @@
+<script>
+    window.addEventListener('DOMContentLoaded', async () => {
+        const res = await fetch('/sesion-activa');
+        const data = await res.json();
+
+        if (!data.loggedIn || data.role !== 'admin') {
+            alert('Acceso no autorizado. Inicia sesión.');
+            window.location.href = '/login.html';
+        }
+    });
+</script>
+
+<!DOCTYPE HTML>
+<html lang=es>
+
+<head>
+    <meta charset="utf-8">
+    <title> NetEndo </title>
+    <meta name="autor" content="Catalina Pérez Vásquez">
+    <meta name="descripción" content="Página web dedicada para venta de videojuegos online">
+    <meta name="viewport" content="width = device-width, initial-scale = 1.0">
+    <link rel="stylesheet" href="/estilo.css">
+    <link href="https://fonts.googleapis.com/css2?family=Jersey+10&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=M+PLUS+Rounded+1c&family=Share+Tech&display=swap"
+        rel="stylesheet">
+    <link rel="icon" type="icon" href="/images/NetEndoIcon.png">
+</head>
+
+<body style=" background-image: url('/images/background_mario.png')">
+    <header>
+        <div class="Logo">
+            <img src="/images/NetEndo.png" width="100" height="100">
+            <a href="/index.html">
+                <h2>NetEndo</h2>
+            </a>
+        </div>
+        <nav>
+            <a href="/index.html" class="nav-link"> Inicio </a>
+            <a href="/carrito.html" class="nav-link"> Carrito</a>
+            <a href="/sobrenosotros.html" class="nav-link active"> Sobre Nosotros</a>
+            <a href="/contactanos.html" class="nav-link">Contactanos</a>
+            <a href="/login.html" class="nav-link" aria-current="page">Login</a>
+        </nav>
+    </header>
+
+<div class="inventario">
+<h1> Inventario de productos </h1>
+
+<div class="filtro-stock">
+    <label for="filtro-stock">Stock menor o igual a:</label>
+    <input type="number" id="filtro-stock" placeholder="Ej: 5">
+    <button onclick="filtrarStock()">Filtrar</button>
+    <button onclick="cargarProductos()">Limpiar</button>
+</div>
+
+
+<table border="1" style="width: 80%; margin: 0 auto; background-color: white; text-align: center;">
+    <thead>
+        <tr>
+            <th>ID</th>
+            <th>Nombre</th>
+            <th>Precio</th>
+            <th>Stock</th>
+            <th>Acciones</th> <!-- NUEVO -->
+        </tr>
+    </thead>    
+    <tbody id="tabla-productos">
+        <!-- Aquí se cargan los productos -->
+    </tbody>
+</table>
+</div>
+</body>
+
+<script>
+    async function cargarProductos() {
+        try {
+            const res = await fetch('/api/productos');
+            const productos = await res.json();
+
+            const tabla = document.getElementById('tabla-productos');
+            tabla.innerHTML = ''; 
+
+            productos.forEach(p => {
+    const fila = `
+        <tr>
+            <td>${p.id}</td>
+            <td contenteditable="true" data-campo="nombre">${p.nombre}</td>
+            <td contenteditable="true" data-campo="precio">${p.precio}</td>
+            <td contenteditable="true" data-campo="stock">${p.stock}</td>
+            <td>
+                <button onclick="guardarEdicion(${p.id}, this)">Guardar</button>
+                <button onclick="eliminarProducto(${p.id}, this)">Eliminar</button>
+            </td>
+        </tr>
+    `;
+    tabla.innerHTML += fila;
+});
+
+
+        } catch (error) {
+            console.error("Error al cargar productos:", error);
+            document.getElementById('tabla-productos').innerHTML = '<tr><td colspan="4">Error al cargar productos</td></tr>';
+        }
+    }
+
+    cargarProductos();
+
+    async function guardarEdicion(id, boton) {
+            const fila = boton.closest('tr');
+            const nombre = fila.children[1].innerText.trim();
+            const precio = parseInt(fila.children[2].innerText.trim());
+            const stock = parseInt(fila.children[3].innerText.trim());
+
+            const data = { nombre, precio, stock };
+
+            try {
+                const res = await fetch(`/api/productos/${id}`, {
+                    method: 'PUT',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify(data)
+                });
+                const respuesta = await res.json();
+                alert(respuesta.mensaje || 'Producto actualizado');
+            } catch (err) {
+                console.error('Error al editar:', err);
+                alert('Error al editar producto');
+            }
+        }
+
+
+        async function eliminarProducto(id, boton) {
+            if (!confirm('¿Eliminar este producto?')) return;
+
+            try {
+                const res = await fetch(`/api/productos/${id}`, { method: 'DELETE' });
+                const respuesta = await res.json();
+                alert(respuesta.mensaje || 'Producto eliminado');
+                boton.closest('tr').remove(); // Elimina la fila de la tabla
+            } catch (err) {
+                console.error('Error al eliminar:', err);
+                alert('Error al eliminar producto');
+            }
+        }
+
+        function filtrarStock() {
+                const limite = parseInt(document.getElementById('filtro-stock').value);
+                if (isNaN(limite)) return;
+
+                const filas = document.querySelectorAll('#tabla-productos tr');
+                filas.forEach(fila => {
+                    const stock = parseInt(fila.children[3].innerText);
+                    fila.style.display = stock <= limite ? '' : 'none';
+                });
+            }
+
+</script>
+</html>

@@ -1,0 +1,128 @@
+<script>
+    window.addEventListener('DOMContentLoaded', async () => {
+        const res = await fetch('/sesion-activa');
+        const data = await res.json();
+
+        if (!data.loggedIn || data.role !== 'admin') {
+            alert('Acceso no autorizado. Inicia sesión.');
+            window.location.href = '/login.html';
+        } else {
+            cargarUsuarios();
+        }
+    });
+</script>
+
+<!DOCTYPE HTML>
+<html lang=es>
+
+<head>
+    <meta charset="utf-8">
+    <title> NetEndo </title>
+    <meta name="autor" content="Catalina Pérez Vásquez">
+    <meta name="descripción" content="Página web dedicada para venta de videojuegos online">
+    <meta name="viewport" content="width = device-width, initial-scale = 1.0">
+    <link rel="stylesheet" href="/estilo.css">
+    <link href="https://fonts.googleapis.com/css2?family=Jersey+10&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=M+PLUS+Rounded+1c&family=Share+Tech&display=swap"
+        rel="stylesheet">
+    <link rel="icon" type="icon" href="/images/NetEndoIcon.png">
+</head>
+
+<body style=" background-image: url('/images/background_mario.png')">
+    <header>
+        <div class="Logo">
+            <img src="/images/NetEndo.png" width="100" height="100">
+            <a href="/index.html">
+                <h2>NetEndo</h2>
+            </a>
+        </div>
+        <nav>
+            <a href="/index.html" class="nav-link"> Inicio </a>
+            <a href="/carrito.html" class="nav-link"> Carrito</a>
+            <a href="/sobrenosotros.html" class="nav-link active"> Sobre Nosotros</a>
+            <a href="/contactanos.html" class="nav-link">Contactanos</a>
+            <a href="/login.html" class="nav-link" aria-current="page">Login</a>
+        </nav>
+    </header>
+
+    <div class="Ventas">
+        <h1>Panel de Ventas</h1>
+        
+        <div class="acciones">
+            <label>Desde: <input type="date" id="fechaInicio"></label>
+            <label>Hasta: <input type="date" id="fechaFin"></label>
+            <label>Producto: <input type="text" id="nombreProducto" placeholder="Buscar por producto"></label>
+            <button onclick="filtrarVentas()">Filtrar</button>
+            <button onclick="cargarVentas()">Ver todas</button>
+            <button onclick="exportarCSV()">Exportar CSV</button>
+        </div>
+        
+        <table id="tablaVentas">
+            <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>Producto</th>
+                    <th>Cantidad</th>
+                    <th>Fecha</th>
+                    <th>Comprador</th>
+                </tr>
+            </thead>
+            <tbody>
+                <!-- Las ventas se insertan aquí -->
+            </tbody>
+            </table>
+    </div>
+
+    <script>
+        async function cargarVentas() {
+            const res = await fetch('/ventas');
+            const datos = await res.json();
+            mostrarVentas(datos);
+        }
+
+        async function filtrarVentas() {
+            const fechaInicio = document.getElementById('fechaInicio').value;
+            const fechaFin = document.getElementById('fechaFin').value;
+            const nombre = document.getElementById('nombreProducto').value;
+
+            const params = new URLSearchParams();
+            if (fechaInicio && fechaFin) {
+                params.append('fecha_inicio', fechaInicio);
+                params.append('fecha_fin', fechaFin);
+            }
+            if (nombre) {
+                params.append('producto', nombre);
+            }
+
+            const res = await fetch(`/ventas/filtro?${params.toString()}`);
+            const datos = await res.json();
+            mostrarVentas(datos);
+        }
+
+        function mostrarVentas(ventas) {
+            const tbody = document.querySelector("#tablaVentas tbody");
+            tbody.innerHTML = "";
+            ventas.forEach(v => {
+                const fila = `
+                        <tr>
+                            <td>${v.id}</td>
+                            <td>${v.producto}</td>
+                            <td>${v.cantidad}</td>
+                            <td>${new Date(v.fecha_venta).toLocaleString()}</td>
+                            <td>${v.nombre_comprador}</td>
+                        </tr>
+                    `;
+                tbody.innerHTML += fila;
+            });
+        }
+
+        function exportarCSV() {
+            window.location.href = '/ventas/exportar';
+        }
+
+        // Carga inicial
+        document.addEventListener('DOMContentLoaded', cargarVentas);
+    </script>
+</body>
+
+</html>

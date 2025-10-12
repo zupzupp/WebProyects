@@ -1,0 +1,84 @@
+<!DOCTYPE HTML>
+<html lang=es>
+
+<head>
+    <meta charset="utf-8">
+    <title> NetEndo </title>
+    <meta name="autor" content="Catalina Pérez Vásquez">
+    <meta name="descripción" content="Página web dedicada para venta de videojuegos online">
+    <meta name="viewport" content="width = device-width, initial-scale = 1.0">
+    <link rel="stylesheet" href="/estilo.css">
+    <link href="https://fonts.googleapis.com/css2?family=Jersey+10&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=M+PLUS+Rounded+1c&family=Share+Tech&display=swap"
+        rel="stylesheet">
+    <link rel="icon" type="icon" href="/images/NetEndoIcon.png">
+</head>
+
+<body style=" background-image: url('/images/background_mario.png')">
+    <header>
+        <div class="Logo">
+            <img src="/images/NetEndo.png" width="100" height="100">
+            <a href="/index.html"><h2>NetEndo</h2></a>
+        </div>
+        <nav>
+            <a href="/index.html" class="nav-link"> Inicio </a>
+            <a href="/carrito.html" class="nav-link"> Carrito</a>
+            <a href="/sobrenosotros.html" class="nav-link"> Sobre Nosotros</a>
+            <a href="/contactanos.html" class="nav-link active" aria-current="page">Contactanos</a>
+            <a href="/login.html" class="nav-link">Login</a>
+        </nav>
+    </header>
+
+    <div class="form-container">
+        <img src="/images/mario-form.png" >
+            <div class="form-box">
+                <h2> ¿Quieres mandarnos un mensaje? ¡Escribelo aquí abajo!</h2>
+              <form id="contactoForm" action="/enviar-mensaje" method="POST">
+                <label for="nombre">Nombre</label>
+                <input type="text" id="nombre" name="nombre" required>
+        
+                <label for="correo">Correo Electrónico</label>
+                <input type="email" id="correo" name="correo" required>
+        
+                <label for="telefono">Número Telefónico</label>
+                <input type="text" id="telefono" name="telefono" required>
+
+                <label for="asunto">Asunto</label>
+                <input type="text" id="asunto" name="asunto" required>
+        
+                <label for="mensaje">Mensaje</label>
+                <textarea id="mensaje" name="mensaje" rows="5" required></textarea>
+        
+                <button type="submit">Enviar</button>
+              </form>
+            </div>
+          </div>
+</body>
+
+<script>
+    document.getElementById('contactoForm').addEventListener('submit', function (e) {
+        e.preventDefault();
+        const nombre = document.getElementById('nombre').value;
+        const correo = document.getElementById('correo').value;
+        const telefono = document.getElementById('telefono').value;
+        const asunto = document.getElementById('asunto').value;
+        const mensaje = document.getElementById('mensaje').value;
+
+        fetch('/contacto', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ nombre, correo, telefono, asunto, mensaje })
+        }).then(res => res.json())
+            .then(data => {
+                if (data.success || data.mensaje) {
+                    alert("Mensaje enviado correctamente.");
+                    document.getElementById('contactoForm').reset();
+                } else {
+                    alert("Ocurrió un error al enviar el mensaje.");
+                }
+            });
+    });
+</script>
+
+
+</html>

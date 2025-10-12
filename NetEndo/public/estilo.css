@@ -1,0 +1,998 @@
+/* Inicio del sector del header y del menú de navegación */
+header{
+    background-color: #e60013;
+    color: white;
+    height: 70px;
+    font-family: Arial, sans-serif;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px;
+    font-family: "Jersey 10", sans-serif;
+}
+
+nav h2 {
+    font-family: "Jersey 10", sans-serif;
+    color:white;
+    font-size: xx-large;
+}
+
+nav a{
+    text-decoration: none;
+    color: white;
+    padding-right: 10px;
+    font-size: large;
+}
+
+a {
+    text-decoration: none;
+}
+
+header a{
+    color: white;
+}
+
+.Logo{
+    display: flex;
+    align-items: center;
+}
+
+.Logo img{
+    height: 60px;
+    width: 50px;
+}
+/* Fin del sector del header y del menú de navegación */
+
+/* Inicio sector body y otros*/
+body{
+    margin: 0;
+}
+
+li {
+    list-style-type: none;
+}
+/* Fin sector body*/
+
+/* Inicio sector carrusel de index.html*/
+.container{
+    padding: 50px;
+    padding-bottom: 100px;
+
+}
+
+.slider-wrapper{
+    position: relative;
+    max-width: 1000px;
+    margin: 0 auto;
+}
+
+.slider{
+    display:flex;
+    aspect-ratio: 16/8;
+    overflow-x: hidden;
+    scroll-snap-type: x mandatory;
+    scroll-behavior: smooth;
+    box-shadow: 0 1.5rem 3rem -0.75rem hsla(0,0%, 0%,0.25);
+    border-radius: 0.5rem;
+}
+
+.slider img{
+    flex: 1 0 100%;
+    scroll-snap-align: start;
+    object-fit: cover;
+}
+
+.slider-nav{
+    display: auto;
+    column-gap: 5px;
+    position: absolute;
+    bottom: 1.25rem;
+    left: 50%;
+    transform: translateX(-50%);
+    z-index: 1;
+}
+
+.slider-nav a{
+    border-radius: 50%;
+    background-color: #fff;
+    opacity: 0.60;
+    display: inline-block;
+    transition: slider 30s ease-in-out;
+    padding:7px;
+}
+
+.slider-nav a:hover{
+    opacity: 1;
+}
+
+/* Fin sector carrusel de index.html*/
+
+/* Inicio sector de nuevos productos de index.html (banner división)*/
+
+.Franja {
+    background-color: #e60013;
+    justify-content: center;
+    align-items: center;
+    display: flex;
+    padding: -150%;
+}
+
+.Franja h2 {
+    font-size: 80px;
+    font-family: "Jersey 10", sans-serif;
+    color: white;
+}
+
+/* Fin sector de nuevos productos de index.html (banner división)*/
+
+
+/* Inicio sector de nuevos productos de index.html (tarjetas presentación)*/
+article.card{
+    max-width: 300px;
+    width: 300px;
+    background-color: #fff;
+    border-radius: 8px;
+    margin: 1rem;
+    box-shadow: 0 0 12px #d7d7d7;
+    overflow: hidden;
+    font-family: "Share Tech", sans-serif;
+}
+
+.header-card img{
+    border-radius: 8px 8px 0 0;
+    max-height: 200px;
+    height: 200px;
+    width: 280px;
+}
+
+.header-card {
+    background-color: #e60013;
+    border-radius: 8px 8px 0 0;
+    max-height: 200px;
+    height: 200px;
+    width: 100%;
+}
+
+.category-card{
+    margin-top: 1rem;
+}
+
+.category-card span{
+    color: white;
+    padding: .2rem .5rem;
+    border-radius: 4px;
+}
+
+.footer-card{
+    padding: 0 1rem;
+    width: 100%;
+    box-sizing: border-box;
+}
+
+.card-wrap{
+    display: grid;
+    flex-flow: wrap;
+    align-items: center;
+    justify-content: center;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 325px));
+}
+
+.text-card button {
+    height: 40px;
+    width: 100%;
+    background-color: #e60013;
+    color: white;
+    border: none;
+    border-radius: 6px;
+    font-size: 18px;
+    font-weight: bold;
+    cursor: pointer;
+    margin: 1rem 0;
+    /* separación arriba y abajo */
+    transition: background-color 0.3s ease;
+}
+
+.text-card button:hover {
+    background-color: #c00010;
+}
+/* Fin sector de nuevos productos de index.html (tarjetas presentación)*/
+
+/* Inicio sector categorías de las tarjetas (tarjetas presentación)*/
+
+.Fantasia {
+    background: rgb(168, 39, 180);
+}
+
+.Simulacion {
+    background: rgb(255, 16, 16);
+}
+
+.Terror-psi {
+    background: rgb(19, 85, 155);
+}
+
+.Multijugador {
+    background: rgb(33, 176, 88);
+}
+
+/* Fin sector categorías de las tarjetas (tarjetas presentación)*/
+
+/* Inicio sector conoce más y el footer de index.html */
+
+footer {
+    background-color: #e60013;
+    color: white;
+    text-align: left;
+    padding: 0.5px;
+    font-size: 25px;
+    font-family: "Jersey 10", sans-serif;
+}
+
+.button-more {
+    display: flex;
+    justify-content: center;
+    padding: 20px;
+    position: relative;
+}
+
+.more {
+    margin-top: 20px;
+    background-color: red;
+    color: white;
+    text-align: center;
+    font-family: "Arial", sans-serif;
+    border: none;
+    padding: 12px 24px;
+    font-size: 16px;
+    font-weight: bold;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+
+}
+
+.more:hover {
+    background-color: rgb(21, 40, 145);
+}
+
+/* Fin sector conoce más y el footer de index.html */
+
+/* Inicio detalles páginas de juegos, orientación vídeos, contenido, recomendaciones entre otros (carpeta gamesProducts) */
+.container-video{
+    display: flex;
+    flex-direction: row;
+    align-items: flex-start;
+    padding: 100px 15px 0 50px;
+    padding-bottom: 100px;
+}
+
+.video-wrapper {
+    margin-right: 40px;
+}
+
+.background-video {
+    background-color: red;
+    padding: 10px;
+    padding-bottom: 60px;
+    border-radius: 15px;
+    display: inline-block;
+}
+
+.text-content {
+    display: flex;
+    flex-direction: column;
+    max-width: 600px;
+    padding-left: 20px;
+}
+
+.title h2{
+    margin: 0;
+    font-family: "Share Tech", sans-serif;
+    font-size: 60px;
+    margin-bottom: 10px;
+}
+
+.description {
+    font-size: 18px;
+    line-height: 1.5;
+    text-align: justify;
+    font-family: "Share Tech", sans-serif;
+}
+
+.price{
+    font-size: 18px;
+    line-height: 1.5;
+    text-align: justify;
+    font-family: "Share Tech", sans-serif;
+}
+
+.buy-button {
+    margin-top: 20px;
+    background-color: red;
+    color: white;
+    text-align: center;
+    font-family: "Arial", sans-serif;
+    border: none;
+    padding: 12px 24px;
+    font-size: 16px;
+    font-weight: bold;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+.buy-button:hover {
+    background-color: darkred;
+}
+
+.Franja-recomendacion {
+    background-color: #e60013;
+    justify-content: center;
+    align-items: center;
+    display: flex;
+    padding: -100%;
+}
+
+.Franja-recomendacion h2 {
+    font-size: 60px;
+    font-family: "Jersey 10", sans-serif;
+    color: white;
+}
+
+/* Fin detalles páginas de juegos, orientación vídeos, contenido, recomendaciones entre otros (carpeta gamesProducts) */
+
+/* Inicio sector formulario (contactanos.html) */
+.form-container {
+    background: rgba(255, 255, 255, 0.9);
+    padding: 40px;
+    border-radius: 15px;
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.2);
+    width: 400px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    position: absolute;
+    top: 80%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+
+
+.form-box h2 {
+    text-align: center;
+    margin-bottom: 20px;
+    font-family: "Share Tech", sans-serif;
+}
+
+.form-box{
+    align-items: center;
+}
+
+form label {
+    display: block;
+    margin-top: 10px;
+    font-weight: bold;
+}
+
+form input,
+form textarea {
+    width: 100%;
+    padding: 10px;
+    margin-top: 5px;
+    border: 2px solid #ccc;
+    border-radius: 8px;
+    font-size: 14px;
+}
+
+form button {
+    margin-top: 20px;
+    width: 100%;
+    background-color: #e60000;
+    color: white;
+    border: none;
+    padding: 12px;
+    font-size: 16px;
+    border-radius: 10px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+form button:hover {
+    background-color: #b80000; }
+/* Fin sector formulario (contactanos.html) */
+
+/* Inicio sector (sobrenosotros.html) */
+
+.yo{
+    width: 1000px;
+}
+
+/* Fin sector (sobrenosotros.html) */
+
+/* Inicio sector (carrito.html) */
+.carrito {
+    padding: 2rem;
+    font-family: 'Share Tech', sans-serif;
+    color: white;
+}
+
+.carrito h2 {
+    text-align: center;
+    font-size: 2rem;
+    margin-bottom: 1.5rem;
+    color: #000000;
+    align-items: center;
+}
+
+.cart{
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    background-color: rgba(255, 255, 255, 0.1);
+    padding: 10px;
+    border-radius: 10px;
+    max-width: 800px;
+    margin: auto;
+}
+
+.cart-item {
+    display: flex;
+    background-color: rgba(255, 255, 255, 0.677);
+    border-radius: 20px;
+    padding: 10px;
+    align-items: center;
+    gap: 10px;
+    box-shadow: 0 0 10px rgba(205, 4, 4, 0.809);
+}
+
+.cart-item img {
+    width: 100px;
+    height: 100px;
+    border-radius: 10px;
+    object-fit: cover;
+}
+
+.item-details h4 {
+    margin: 0;
+    color: #000000;
+    font-size: 25px;
+}
+
+.item-details p {
+    margin: 5px;
+    color: #000000;
+}
+
+.total-cart {
+    text-align: center;
+    margin-top: 2rem;
+}
+
+.total-cart h3 {
+    color: #000000;
+    font-size: 35px;
+}
+
+.btn {
+    background-color: #e60013;
+    color: white;
+    border: none;
+    padding: 10px 15px;
+    border-radius: 5px;
+    font-size: 20px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+    width: 40%;
+}
+
+.btn:hover {
+    background-color: #6c0808;
+}
+
+.acciones{
+    gap:25px;
+    display: flex;
+    justify-content: center;
+}
+
+.finalizar{
+    background-color: red;
+}
+.cerrar{
+    background-color: rgb(255, 0, 0);
+}
+
+/* Fin sector (carrito.html) */
+
+/* Inicio sector (login.html) */
+.login {
+    width: auto;
+    height: auto;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding-top: 100px;
+    padding-bottom: 100px;
+}
+
+.login-container {
+    display: flex;
+    width: 90%;
+    max-width: 1000px;
+    height: 600px;
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.2);
+    border-radius: 10px;
+    overflow: hidden;
+    background-color: rgba(255, 255, 255, 0.702);
+    position:relative;
+}
+
+.banner-vert {
+    width: 50%;
+    height: 100%;
+    background-color: #eeeeeeca;
+}
+
+.banner-vert img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+}
+
+.form-section {
+    width: 50%;
+    padding: 3rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    font-family: "Share Tech", sans-serif;
+}
+
+.form-section h2 {
+    margin-bottom: 2rem;
+    color: #333;
+}
+
+form label {
+    display: block;
+    margin-bottom: 0.3rem;
+    color: #000000;
+    font-size: 0.9rem;
+    font-family: "Share Tech", sans-serif;
+}
+
+form input {
+    width: 100%;
+    padding: 0.8rem;
+    margin-bottom: 1rem;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    font-size: 1rem;
+    font-family: "Share Tech", sans-serif;
+}
+
+.forgot-password {
+    display: block;
+    margin-bottom: 1.5rem;
+    font-size: 0.9rem;
+    color: #ff0000;
+    text-decoration: none;
+}
+
+.forgot-password:hover {
+    text-decoration: underline;
+}
+
+button {
+    width: 100%;
+    padding: 0.8rem;
+    background-color: #e60013;
+    border: none;
+    color: #ffffff;
+    font-weight: bold;
+    font-size: 1rem;
+    border-radius: 5px;
+    cursor: pointer;
+    font-family: "Share Tech", sans-serif;
+}
+
+button:hover {
+    background-color: #801818;
+}
+
+/* Fin sector (login.html) */
+
+/* Inicio sector (registro.html) */
+.register {
+    margin-top: 1rem;
+    font-size: 0.9rem;
+    color: #555;
+}
+
+.register a {
+    color: #ff0000;
+    text-decoration: none;
+}
+
+.register a:hover {
+    text-decoration: underline;
+}
+
+/* Fin sector (registro.html) */
+
+/* Inicio sector (agregar.html) */
+.product{
+    width: auto;
+        height: auto;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        padding-top: 100px;
+        padding-bottom: 100px;
+        box-shadow: 0 0 20px rgba(0, 0, 0, 0.2);
+        border-radius: 10px;
+        overflow: hidden;
+        background-color: rgba(255, 255, 255, 0.702);;
+}
+.product h2{
+    font-family: "Share Tech", sans-serif;
+}
+
+.product button{
+    color: white;
+}
+
+.product h1{
+    font-family: "Share Tech", sans-serif;
+    padding-right: 150px;
+}
+
+select {
+    padding: 10px;
+    font-size: 1rem;
+    border: 0.8px solid #807e7e;
+    border-radius: 8px;
+    background-color: #fff;
+    color: #a3a3a3bf;
+}
+
+.popup {
+    position: fixed;
+    bottom: 30px;
+    right: 30px;
+    background-color: #28a745;
+    color: white;
+    padding: 15px 20px;
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+    font-weight: bold;
+    display: none;
+    z-index: 9999;
+    animation: fadein 0.3s ease-out;
+    font-family: "Share Tech", sans-serif;
+}
+
+@keyframes fadein {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.popup.error {
+    background-color: #dc3545;
+}
+/* Fin sector (agregar.html) */
+
+/* Sector menuadmin*/
+
+.menu-admin {
+    text-align: center;
+    margin-top: 50px;
+    font-family: 'Share Tech', sans-serif;
+    align-items: center;
+    display:flexbox;
+}
+
+.admin-buttons {
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+    margin-top: 30px;
+    text-align: center;
+    align-items: center;
+}
+
+.admin-buttons button {
+    background-color: #ff0000;
+    color: white;
+    border: none;
+    padding: 15px 25px;
+    border-radius: 10px;
+    font-size: 16px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.admin-buttons button:hover {
+    background-color: #b30000;
+}
+
+.cerrarsesion {
+    gap:40px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 15px 25px;
+    margin-top: 2rem;
+    border-radius: 10px;
+    width: 200px;
+    padding-left: 600px;
+}
+
+.cerrarsesion button{
+    font-size: 16px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    align-items: center;
+    align-self: auto;
+}
+.cerrarsesion button:hover {
+    background-color: #b30000;
+}
+
+/* Fin menu admin*/
+
+/* Cuenta.html*/
+.contenido-cuenta {
+    margin-top: 50px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 30px;
+    text-align: left;
+    padding: 20px;
+}
+
+.contenido-cuenta img {
+    border-radius: 20px;
+    width: 200px;
+    height: auto;
+}
+
+.info-usuario h1,
+.info-usuario h3 {
+    font-family: 'Share Tech', sans-serif;
+    color: rgb(0, 0, 0);
+    margin: 10px 0;
+}
+
+#rolUsuario {
+    font-size: 1.5rem;
+}
+
+.usuario{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+/* Página inventario*/
+/* Tabla de usuarios */
+.inventario {
+    padding: 40px 0;
+    text-align: center;
+}
+
+table {
+    width: 90%;
+    margin: 0 auto;
+    border-collapse: collapse;
+    background-color: white;
+    border-radius: 20px;
+    overflow: hidden;
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+}
+
+th,
+td {
+    padding: 16px;
+    font-size: 16px;
+}
+
+th {
+    background-color: #ff0000;
+    color: white;
+    font-family: 'Share Tech', sans-serif;
+}
+
+td {
+    border-bottom: 1px solid #ddd;
+}
+
+select,
+button {
+    font-family: 'Share Tech', sans-serif;
+}
+
+.inventario h1 {
+    font-family: 'Share Tech', sans-serif;
+    font-size: 36px;
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+/* Filtro de stock */
+.filtro-stock {
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+.filtro-stock label {
+    margin-right: 10px;
+    font-weight: bold;
+    font-family: 'Share Tech', sans-serif;
+    font-size: 16px;
+}
+
+.filtro-stock input[type="number"] {
+    padding: 10px;
+    border: 2px solid #ccc;
+    border-radius: 12px;
+    font-family: 'M PLUS Rounded 1c', sans-serif;
+    width: 120px;
+    font-size: 16px;
+    margin-right: 10px;
+}
+
+/* Botones del filtro */
+.filtro-stock button {
+    padding: 10px 20px;
+    font-size: 16px;
+    font-family: 'Share Tech', sans-serif;
+    border: none;
+    border-radius: 14px;
+    background-color: #ff0000;
+    color: white;
+    cursor: pointer;
+    margin: 4px;
+    transition: background-color 0.3s ease;
+}
+
+.filtro-stock button:hover {
+    background-color: #b30000;
+}
+/* Fin página inventario*/
+/*Graficas*/
+.graficas-panel {
+    width: 90%;
+    max-width: 800px;
+    margin: 30px auto;
+    background: white;
+    padding: 2rem;
+    border-radius: 20px;
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.2);
+}
+
+.TituloGraficas h1 {
+    font-family: 'Share Tech', sans-serif;
+    font-size: 36px;
+    margin-top: 30px;
+    text-align: center;
+}
+
+.graficas-panel canvas {
+    display: block;
+    max-width: 100%;
+    height: 200px !important;
+    margin: 30px auto;
+    border-radius: 12px;
+    background-color: #f8f8f8;
+    padding: 10px;
+}
+/*Fin Graficas*/
+/*Ventas*/
+.Ventas h1 {
+    font-family: 'Share Tech', sans-serif;
+    font-size: 36px;
+    margin-top: 30px;
+    text-align: center;
+}
+
+/* Espaciado general y alineación */
+.Ventas .acciones {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+    /* separa los elementos */
+    align-items: center;
+    justify-content: flex-start;
+    margin-bottom: 20px;
+    padding: 10px;
+}
+
+/* Estilo uniforme para inputs y botones */
+.Ventas input[type="date"],
+.Ventas input[type="text"],
+.Ventas button {
+    font-family: 'Share Tech', sans-serif;
+    padding: 10px;
+    font-size: 16px;
+    border-radius: 5px;
+    border: 1px solid #ccc;
+}
+
+/* Espaciado entre etiquetas e inputs */
+.Ventas label {
+    display: flex;
+    flex-direction: column;
+    font-size: 14px;
+}
+
+/* Botones más parejos y separados */
+.Ventas button {
+    background-color: #e50914;
+    color: white;
+    border: none;
+    cursor: pointer;
+    transition: background 0.3s ease;
+}
+
+.Ventas button:hover {
+    background-color: #c10812;
+}
+
+/* Tabla de ventas estilizada */
+#tablaVentas {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 20px;
+    font-family: 'Share Tech', sans-serif;
+}
+
+#tablaVentas th,
+#tablaVentas td {
+    border: 1px solid #fff;
+    padding: 12px;
+    text-align: center;
+    background-color: #ff0000;
+    color: white;
+}
+
+#tablaVentas th {
+    background-color: #d40000;
+    font-size: 18px;
+}
+
+/* Fin ventas*/
+
+/*sobre nosotros*/
+.sobre-nosotros {
+    font-family: 'Share Tech', sans-serif;
+    max-width: 800px;
+    margin: 40px auto;
+    background: rgba(255, 255, 255, 0.9);
+    padding: 20px 30px;
+    border-radius: 15px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+    text-align: center;
+}
+
+.sobre-nosotros h2 {
+    font-size: 28px;
+    margin-bottom: 15px;
+}
+
+.sobre-nosotros p {
+    font-size: 18px;
+    line-height: 1.6;
+}
+/* Fin sobre nosotros*/

@@ -1,0 +1,14 @@
+[
+  {
+    "nombre": "Catalina",
+    "correo": "cata.perez2004@gmail.com",
+    "asunto": "Prueba",
+    "mensaje": "Si es que este mensaje llega a la base de datos, es porque está funcionando perfectamente el formulario :D."
+  },
+  {
+    "nombre": "Catalina",
+    "correo": "cata.perez2004@gmail.com",
+    "asunto": "Prueba",
+    "mensaje": "Si este mensaje llega a la base de datos, quiere decir que el formulario está funcionando correctamente ^^"
+  }
+]

@@ -1,0 +1,32 @@
+[
+  {
+    "nombre": "Red Dead Redemption",
+    "descripcion": "asdadad",
+    "precio": "2333",
+    "categoria": "Terror-psi",
+    "cantidad": "1",
+    "imagen": "https://www.google.com/url?sa=i&url=https%3A%2F%2Fwww.nintendo.com%2Fes-cl%2Fstore%2Fproducts%2Fred-dead-redemption-switch%2F&psig=AOvVaw0kCstOsrfurFvUHtraY0rh&ust=1749683791149000&source=images&cd=vfe&opi=89978449&ved=0CBUQjRxqFwoTCKiwm5n-540DFQAAAAAdAAAAABAE",
+    "id": 1749598786654,
+    "stock": 10
+  },
+  {
+    "nombre": "Red Dead Redemption",
+    "descripcion": "Red Dead Redemption Descripción",
+    "precio": "20000",
+    "categoria": "Simulacion",
+    "cantidad": "3",
+    "imagen": "https://www.google.com/url?sa=i&url=https%3A%2F%2Fwww.nintendo.com%2Fes-cl%2Fstore%2Fproducts%2Fred-dead-redemption-switch%2F&psig=AOvVaw1Diz2aBaiePVh97ds8GZgF&ust=1749611128842000&source=images&cd=vfe&opi=89978449&ved=0CBQQjRxqFwoTCOjnksDv5Y0DFQAAAAAdAAAAABAE",
+    "id": 1750733254040,
+    "stock": 10
+  },
+  {
+    "nombre": "Prueba",
+    "descripcion": "Prueba",
+    "precio": "1000",
+    "categoria": "Otros",
+    "cantidad": "1",
+    "imagen": "https://www.google.com/url?sa=i&url=https%3A%2F%2Fwww.nintendo.com%2Fes-cl%2Fstore%2Fproducts%2Fred-dead-redemption-switch%2F&psig=AOvVaw1Diz2aBaiePVh97ds8GZgF&ust=1749611128842000&source=images&cd=vfe&opi=89978449&ved=0CBQQjRxqFwoTCOjnksDv5Y0DFQAAAAAdAAAAABAE",
+    "id": 1750733483030,
+    "stock": 10
+  }
+]

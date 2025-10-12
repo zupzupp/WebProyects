@@ -1,0 +1,115 @@
+<!DOCTYPE HTML>
+<html lang=es>
+
+<head>
+    <meta charset="utf-8">
+    <title> NetEndo </title>
+    <meta name="autor" content="Catalina Pérez Vásquez">
+    <meta name="descripción" content="Página web dedicada para venta de videojuegos online">
+    <meta name="viewport" content="width = device-width, initial-scale = 1.0">
+    <link rel="stylesheet" href="/estilo.css">
+    <link href="https://fonts.googleapis.com/css2?family=Jersey+10&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=M+PLUS+Rounded+1c&family=Share+Tech&display=swap"
+        rel="stylesheet">
+    <link rel="icon" type="icon" href="/images/NetEndoIcon.png">
+</head>
+
+<body style=" background-image: url('/images/background_mario.png')">
+    <header>
+        <div class="Logo">
+            <img src="/images/NetEndo.png" width="100" height="100">
+            <a href="/index.html"><h2>NetEndo</h2></a>
+        </div>
+        <nav>
+            <a href="/index.html" class="nav-link"> Inicio </a>
+            <a href="/carrito.html" class="nav-link active" aria-current="page"> Carrito</a>
+            <a href="/sobrenosotros.html" class="nav-link"> Sobre Nosotros</a>
+            <a href="/contactanos.html" class="nav-link">Contactanos</a>
+            <a href="/login.html" class="nav-link">Login</a>
+        </nav>
+    </header>
+    <div class = "carrito">
+        <h2> Tu carrito </h2>
+        <div class = "cart">
+        </div>
+
+        <div class="total-cart">
+            <h3> Total: $0</h3>
+        </div>
+        <div class="acciones">
+            <button class="btn finalizar">Finalizar Compra</button>
+            <button onclick="vaciarCarrito()" class="btn vaciar">Vaciar carrito</button>
+        </div>
+
+    </div>
+</body>
+
+<script>
+    document.addEventListener("DOMContentLoaded", function () {
+        let carrito = JSON.parse(localStorage.getItem("carrito")) || [];
+        const cartDiv = document.querySelector(".cart");
+        const totalDiv = document.querySelector(".total-cart");
+
+        cartDiv.innerHTML = ""; // Limpia lo anterior
+        let total = 0;
+
+        carrito.forEach(item => {
+            total += item.precio * item.cantidad;
+
+            const itemHTML = `
+                <div class="cart-item">
+                    <img src="${item.imagen}" alt="${item.nombre}">
+                    <div class="item-details">
+                        <h4>${item.nombre}</h4>
+                        <p>Precio: $${item.precio}</p>
+                        <p>Cantidad: ${item.cantidad}</p>
+                    </div>
+                </div>
+            `;
+            cartDiv.innerHTML += itemHTML;
+        });
+
+        totalDiv.innerHTML = `<h3>Total: $${total}</h3>`;
+    });
+
+    function vaciarCarrito() {
+            localStorage.removeItem("carrito");
+            location.reload(); // Recarga para mostrar el carrito vacío
+        }
+
+        document.querySelector(".finalizar").addEventListener("click", async () => {
+                const carrito = JSON.parse(localStorage.getItem("carrito")) || [];
+                if (carrito.length === 0) {
+                    alert("El carrito está vacío");
+                    return;
+                }
+
+                for (const item of carrito) {
+                    try {
+                        const res = await fetch("/comprar", {
+                            method: "POST",
+                            headers: {
+                                "Content-Type": "application/json"
+                            },
+                            body: JSON.stringify({ nombre: item.nombre, cantidad: item.cantidad })
+                        });
+
+                        const data = await res.json();
+                        if (!res.ok) {
+                            alert(`Error comprando ${item.nombre}: ${data.mensaje}`);
+                            return;
+                        }
+                    } catch (error) {
+                        alert("Error al conectar con el servidor");
+                        return;
+                    }
+                }
+
+                alert("Compra realizada con éxito");
+                localStorage.removeItem("carrito");
+                location.reload();
+            });
+
+</script>
+    
+</html>
